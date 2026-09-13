@@ -283,7 +283,13 @@ RETRO_API bool retro_load_game(const struct retro_game_info *game)
    //Check extension
    char *path = (char *)malloc(strlen(game->path) + 1);
    strcpy(path, game->path);
-   char *ext = strchr(path, '.');
+   // Last dot: directory names may contain dots too.
+   char *ext = strrchr(path, '.');
+   if(!ext)
+   {
+      free(path);
+      return false;
+   }
 
    //Check needed variables
    struct retro_variable var = {0};

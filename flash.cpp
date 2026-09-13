@@ -34,6 +34,8 @@ VE_VMS_FLASH::VE_VMS_FLASH(VE_VMS_RAM *_ram)
 	rootBlock     = new byte[0x200];
 	data          = new byte[0x20000];
 	
+	// The destructor closes this when set; only a writable .bin sets it.
+	flashWriter   = NULL;
 	IsRealFlash   = true;
 	IsSaveEnabled = true;
 	
